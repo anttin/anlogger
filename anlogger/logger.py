@@ -4,9 +4,10 @@ import os
 
 class Logger(object):
 
-  def __init__(self, name, default_loglevel='INFO', fmt=None, syslog=None):
+  def __init__(self, name, default_loglevel='INFO', fmt=None, syslog=None, syslog_facility=None):
     self.name   = name
     self.syslog = syslog
+    self.syslog_facility = syslog_facility
     self.fmt = fmt if fmt is not None else "%(asctime)-15s %(name)s %(levelname)s %(message)s"
 
     if 'LOGLEVEL' in os.environ:
@@ -27,7 +28,10 @@ class Logger(object):
         _addr = "/dev/log" if os.path.exists("/dev/log") else None
 
       if _addr is not None:
-        handler = logging.handlers.SysLogHandler(address=_addr)
+        handler = logging.handlers.SysLogHandler(
+          address=_addr,
+          facility=syslog_facility
+        )
         self.logger.addHandler(handler)
 
 

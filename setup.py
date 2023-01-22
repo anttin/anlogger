@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
   name="anlogger",
-  version="1.0.0",
+  version="1.1.0",
   author="anttin",
   author_email="muut.py@antion.fi",
   description="Module to assist in setting up logging.",
